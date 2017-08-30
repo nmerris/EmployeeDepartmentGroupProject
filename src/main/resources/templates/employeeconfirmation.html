@@ -14,17 +14,19 @@
             <div class="panel-body">
 
                 <div class="panel panel-primary">
-                    <div class="panel-heading"><h4><b>Department Name</b></h4></div>
+                    <div class="panel-heading"><h4><b>Employee Just Added</b></h4></div>
                     <ul class="list-group">
-                        <li class="list-group-item" th:text="${department.name}"></li>
-                        <!--<li class="list-group-item" th:text="${department.deptHeadEmployee.firstName}"></li>-->
+                        <li class="list-group-item" th:text="${employee.firstName} + ' ' + ${employee.lastName}"></li>
+                        <li class="list-group-item" th:text="${employee.department.id}"></li>
+                        <li class="list-group-item" th:text="${employee.department.name}"></li>
                     </ul>
                 </div>
-                <a class="btn btn-primary bold-input" th:href="@{/adddepartment}">+ Add Another</a>
+                <a class="btn btn-primary bold-input" th:href="@{/addemployee}">+ Add Another</a>
             </div>
         </div>
     </div>
 </div>
+
 
 <!-- Footer -->
 

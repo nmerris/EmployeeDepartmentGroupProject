@@ -1,5 +1,7 @@
 package com.example.demo.models;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
@@ -10,6 +12,7 @@ public class Employee {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
+    @NotEmpty
     private String firstName;
 
     private String lastName;
@@ -26,12 +29,11 @@ public class Employee {
     private Department department;
 
 
+    @OneToOne(mappedBy = "deptHeadEmployee", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+//    @JoinColumn(name = "ifhead_department_id")
+    public Department headOfThisDepartment;
 
 
-
-//    @OneToOne(mappedBy = "departmentHead", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-//    @JoinColumn(name = "departmentHead_id")
-//    private Department departmentHead;
 
     public long getId() {
         return id;
@@ -79,5 +81,13 @@ public class Employee {
 
     public void setDepartment(Department department) {
         this.department = department;
+    }
+
+    public Department getHeadOfThisDepartment() {
+        return headOfThisDepartment;
+    }
+
+    public void setHeadOfThisDepartment(Department headOfThisDepartment) {
+        this.headOfThisDepartment = headOfThisDepartment;
     }
 }

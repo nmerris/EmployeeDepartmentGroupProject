@@ -8,10 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
@@ -56,24 +53,28 @@ public class MainController {
     {
         if(bindingResult.hasErrors()) {
 
+             System.out.println(bindingResult.toString());
+
             return "departmentform";
         }
 
-        if (employeeRepository.findOne(department.getDepartmentHeadEmployeeId())==null)
-        {
-            return "errorpage";
-        }
+//        if (employeeRepository.findOne(department.getDeptHeadEmployee().getId()) == null)
+//        {
+//            // user entered a dept head employee id that was not in the employee table, so show an error message
+//            return "errorpage";
+//        }
 
-        Employee head = employeeRepository.findOne(department.getDepartmentHeadEmployeeId());
-
-
-
-
+//        Employee head = employeeRepository.findOne(department.getDeptHeadEmployee().getId());
+//
+//        department.setDeptHeadEmployee(head);
 
 //        head.setDepartment(department);
 
-        department.setDepartmentHeadFullName(head.getFirstName() + " "+head.getLastName());
-//        model.addAttribute("head", head);
+        departmentRepository.save(department);
+
+//
+//        department.setDepartmentHeadFullName(head.getFirstName() + " "+head.getLastName());
+////        model.addAttribute("head", head);
         model.addAttribute("department", department);
 
         return "confirmation";
@@ -83,8 +84,93 @@ public class MainController {
     }
 
 
+    @GetMapping("/addemployee")
+    public String addemployee(Model model)
+    {
+        Employee employee= new Employee();
+        model.addAttribute("employee", employee);
+
+        Iterable<Department> departments = departmentRepository.findAll();
+        model.addAttribute("alldepartments", departments);
 
 
+        return "employeeform";
+
+    }
+
+    @PostMapping("/addemployee")
+    public String postDep(@Valid @ModelAttribute("employee") Employee employee, BindingResult bindingResult, Model model)
+
+    {
+        Iterable<Department> departments = departmentRepository.findAll();
+
+        if(bindingResult.hasErrors()) {
+//            Iterable<Department> departments = departmentRepository.findAll();
+            model.addAttribute("alldepartments", departments);
+            return "employeeform";
+        }
+
+
+        employee.setDepartment(departmentRepository.findOne(employee.getDepartment().getId()));
+
+        employeeRepository.save(employee);
+
+
+
+//        if (employee.getHeadOfThisDepartment()!=null)
+//        {
+////            employee.getHeadOfThisDepartment().getDeptHeadEmployee().setId(employee.getId());
+//
+//            Department departmentwithhead = employee.getHeadOfThisDepartment();
+//
+//            departmentwithhead.setDeptHeadEmployee(employee);
+//
+//            departmentRepository.save(departmentwithhead);
+//        }
+//Employee employeetest = employeeRepository.findOne(employee.getId());
+
+        model.addAttribute("employee", employee);
+
+        System.out.println("********************************************************" + employee.getDepartment().getName());
+
+        return "employeeconfirmation";
+
+    }
+
+    @GetMapping("/listall")
+    public String displayall(Model model)
+    {
+
+        Iterable<Department> alldepartments = departmentRepository.findAll();
+
+        model.addAttribute("alldepartments", alldepartments);
+
+        return "departmentlist";
+
+    }
+
+    @RequestMapping("/show/{id}")
+    public String showallmov(@PathVariable("id") long id, Model model){
+
+        Department onedepartment = departmentRepository.findOne(id);
+        model.addAttribute("onedepartment", onedepartment);
+
+//        System.out.println("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$" + onedepartment.g);
+
+        return "employeelist";
+    }
+
+    // allow user to add a movie to a director
+    @RequestMapping("/update/{id}")
+    //get mapping
+    public String updatemoivetodir(@PathVariable("id") long id, Model model) {
+
+
+        Department onedepart = departmentRepository.findOne(id);
+        model.addAttribute("onedepart", onedepart);
+
+        return "departmentform";
+    }
 
 
 }

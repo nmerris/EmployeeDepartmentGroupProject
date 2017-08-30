@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Title</title>
+</head>
+<body>
+<table>
+    <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>HeadName</th>
+    </tr>
+    <th:block th:each="item:${alldepartments}">
+        <tr>
+
+            <td th:text="${item.id}"></td>
+            <td th:text="${item.name}"></td>
+            <td th:text="${item.deptHeadEmployee != null} ? ${item.deptHeadEmployee.id} : 'No ID'">No Head</td>
+
+            <td>
+                <a th:href="@{/update/{id}(id=${item.id})}">Update the department info</a>
+                <a th:href="@{/show/{id}(id=${item.id})}">Show all employees in this department</a>
+            </td>
+        </tr>
+
+        <!--</tr>-->
+
+        <!--<tr><td th:text="'Movie by ' + ${director.name} + ': '"></td></tr>-->
+
+
+        <!--<th:block th:each="movie:${director.movies}">-->
+            <!--<tr>-->
+                <!--&lt;!&ndash;<td th:text="'Id:' + ${movie.id}"></td>&ndash;&gt;-->
+                <!--<td th:text="'Title:' + ${movie.title}"></td>-->
+                <!--<td th:text="'Description:' + ${movie.description}"></td>-->
+                <!--<td th:text="'Year:' + ${movie.year}"></td>-->
+            <!--</tr>-->
+            <!--&lt;!&ndash;<tr><br/></tr>&ndash;&gt;-->
+            <!--&lt;!&ndash;<tr><br/></tr>&ndash;&gt;-->
+        <!--</th:block>-->
+
+        <!--&lt;!&ndash;<tr><br/></tr>&ndash;&gt;-->
+        <!--&lt;!&ndash;<tr><br/></tr>&ndash;&gt;-->
+
+        <!--<tr>====================================================================================================================</tr>-->
+
+
+    </th:block>
+</table>
+</body>
+</html>

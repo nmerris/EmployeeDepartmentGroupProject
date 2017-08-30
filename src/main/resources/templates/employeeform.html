@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Title</title>
+</head>
+<body>
+
+<form action="#" th:action="@{/addemployee}" th:object="${employee}" method="post">
+
+    <!--<p><input type="hidden" th:field="*{id}"/></p>-->
+
+    <!--<p><input type="text" th:field="*{director.id}"/></p>-->
+
+
+    <select th:field="*{department.id}">
+        <!--<th:block th:each="director:${alldirector}">-->
+        <option th:each="department:${alldepartments}"
+                th:value="${department.id}" th:inline="text">[[${department.name}]]</option>
+
+        <!--</th:block>-->
+    </select>
+
+
+    <p>Enter the first name of the employee: <input type="text" th:field="*{firstName}" /></p>
+
+    <p>Enter the last name: <input type="text" th:field="*{lastName}"/></p>
+
+    <p>Enter the cellphone number: <input type="text" th:field="*{cellNumber}" /></p>
+
+    <p>Enter the work number: <input type="text" th:field="*{workNumber}" /></p>
+
+    <p>If a head, choose which department</p>
+
+    <select th:field="*{headOfThisDepartment.id}">
+        <!--<th:block th:each="director:${alldirector}">-->
+        <option th:each="department:${alldepartments}"
+                th:value="${department.id}" th:inline="text">[[${department.name}]]</option>
+
+        <!--</th:block>-->
+    </select>
+
+
+
+    <!--<p>Enter the Director Name: <input type="text" placeholder="Enter Director name" name="dirName"/></p>-->
+
+    <!--<p>Enter the movies: <input type="text" th:field="*{movies}" /></p>-->
+    <p><input type="submit" value="Add" /> <input type="reset" value="Reset" /></p>
+
+</form>
+
+
+</body>
+</html>

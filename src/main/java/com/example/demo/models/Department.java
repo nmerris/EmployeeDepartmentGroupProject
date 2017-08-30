@@ -28,16 +28,10 @@ public class Department {
     public Set<Employee> employees;
 
 
-//    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    // when an administrator is entering a new department, they must specify the dept head employee id
-    // if it's not in the employee repo, show a message saying that the employee was not found
-//    public Employee departmentHead;
+    @OneToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "deptHeadEmployee_id")
+    private Employee deptHeadEmployee;
 
-//    public Employee departmentHead;
-
-    //@NotNull
-    private long departmentHeadEmployeeId;
-    private String departmentHeadFullName;
 
 
     public long getId() {
@@ -64,36 +58,11 @@ public class Department {
         this.employees = employees;
     }
 
-//    public long getDepartmentHeadEmployeeId() {
-//        return departmentHeadEmployeeId;
-//    }
-//
-//    public void setDepartmentHeadEmployeeId(long departmentHeadEmployeeId) {
-//        this.departmentHeadEmployeeId = departmentHeadEmployeeId;
-//    }
-//
-//    public Employee getDepartmentHead() {
-//        return departmentHead;
-//    }
-//
-//    public void setDepartmentHead(Employee departmentHead) {
-//        this.departmentHead = departmentHead;
-//    }
-
-
-    public long getDepartmentHeadEmployeeId() {
-        return departmentHeadEmployeeId;
+    public Employee getDeptHeadEmployee() {
+        return deptHeadEmployee;
     }
 
-    public void setDepartmentHeadEmployeeId(long departmentHeadEmployeeId) {
-        this.departmentHeadEmployeeId = departmentHeadEmployeeId;
-    }
-
-    public String getDepartmentHeadFullName() {
-        return departmentHeadFullName;
-    }
-
-    public void setDepartmentHeadFullName(String departmentHeadFullName) {
-        this.departmentHeadFullName = departmentHeadFullName;
+    public void setDeptHeadEmployee(Employee deptHeadEmployee) {
+        this.deptHeadEmployee = deptHeadEmployee;
     }
 }

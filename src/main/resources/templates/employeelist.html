@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Title</title>
+</head>
+<body>
+
+<table>
+    <h3 th:text="'list of employees in department: ' + ${onedepartment.name}"></h3>
+    <th:block th:each="item:${onedepartment.employees}">
+        <tr>
+            <!--<td th:text="'Id:' + ${movie.id}"></td>-->
+            <td th:text="'First Name:' + ${item.firstName}"></td>
+            <td th:text="'Last Name:' + ${item.lastName}"></td>
+            <td th:text="'Cellphone:' + ${item.cellNumber}"></td>
+            <td th:text="'Work Number:' + ${item.workNumber}"></td>
+        </tr>
+        <!--<tr><br/></tr>-->
+        <!--<tr><br/></tr>-->
+    </th:block>
+
+</table>
+
+</body>
+</html>
