@@ -149,8 +149,9 @@ public class MainController {
 
     }
 
+    // show all employees
     @RequestMapping("/show/{id}")
-    public String showallmov(@PathVariable("id") long id, Model model){
+    public String showallemployees(@PathVariable("id") long id, Model model){
 
         Department onedepartment = departmentRepository.findOne(id);
         model.addAttribute("onedepartment", onedepartment);
@@ -160,14 +161,14 @@ public class MainController {
         return "employeelist";
     }
 
-    // allow user to add a movie to a director
+    // allow user to update a department
     @RequestMapping("/update/{id}")
     //get mapping
-    public String updatemoivetodir(@PathVariable("id") long id, Model model) {
+    public String updatedepartment(@PathVariable("id") long id, Model model) {
 
 
         Department onedepart = departmentRepository.findOne(id);
-        model.addAttribute("onedepart", onedepart);
+        model.addAttribute("department", onedepart);
 
         return "departmentform";
     }
