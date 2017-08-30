@@ -21,6 +21,10 @@ public class Employee {
 
     private long workNumber;
 
+
+
+
+
     @ManyToOne(fetch = FetchType.EAGER)
     // director_id is just the name we are choosing to call the JOIN column, you can name it anything you want, but
     // [entity-name]_id is convention

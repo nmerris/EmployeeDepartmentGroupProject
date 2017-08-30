@@ -15,8 +15,8 @@
             <td th:text="'Last Name:' + ${item.lastName}"></td>
             <td th:text="'Cellphone:' + ${item.cellNumber}"></td>
             <td th:text="'Work Number:' + ${item.workNumber}"></td>
-            <td><a th:href="@{~/updateemployee/{id}(id = ${item.id})}">Update</a></td>
-            <td><a th:href="@{~/deleteemployee/{id}(id = ${item.id})}">Delete</a></td>
+            <td><a th:href="@{/updateemployee/{id}(id = ${item.id})}">Update</a></td>
+            <td><a th:href="@{/deleteemployee/{id}(id = ${item.id})}">Delete</a></td>
         </tr>
         <!--<tr><br/></tr>-->
         <!--<tr><br/></tr>-->

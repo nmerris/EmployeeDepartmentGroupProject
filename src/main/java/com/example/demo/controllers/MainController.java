@@ -174,4 +174,53 @@ public class MainController {
     }
 
 
+    // allow user to update one employee
+    @RequestMapping("/updateemployee/{id}")
+    //get mapping
+    public String updateemployee(@PathVariable("id") long id, Model model) {
+
+
+        Employee oneemployee = employeeRepository.findOne(id);
+        model.addAttribute("employee", oneemployee);
+
+        return "employeeform";
+    }
+
+
+    // allow user to delete one employee
+    @RequestMapping("/deleteemployee/{id}")
+    //get mapping
+    public String deleteemployee(@PathVariable("id") long id, Model model) {
+
+        Employee oneemployee = employeeRepository.findOne(id);
+
+
+        // you MUST first remove the employee from the set of employees for their department, then you can delete the employee
+        employeeRepository.findOne(id).getDepartment().removeEmployee(employeeRepository.findOne(id));
+        employeeRepository.delete(id);
+
+
+
+//        model.addAttribute("employee", oneemployee);
+
+//
+//        Department onedepartment = departmentRepository.findOne(oneemployee.getDepartment().getId());
+//        model.addAttribute("onedepartment", departmentRepository.findOne(oneemployee.getDepartment().getId()));
+//
+//        System.out.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% deptId: " + oneemployee.getDepartment().getId());
+//
+//        System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! employeeID: " + id);
+//
+
+
+
+
+        long deptToGoTo = oneemployee.getDepartment().getId();
+
+
+        return "redirect:/show/" + deptToGoTo;
+    }
+
+
+
 }

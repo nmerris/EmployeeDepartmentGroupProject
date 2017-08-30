@@ -33,6 +33,10 @@ public class Department {
     private Employee deptHeadEmployee;
 
 
+    public void removeEmployee(Employee employee) {
+        employees.remove(employee);
+    }
+
 
     public long getId() {
         return id;
