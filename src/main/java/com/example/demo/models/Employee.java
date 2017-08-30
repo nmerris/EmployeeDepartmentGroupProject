@@ -26,9 +26,12 @@ public class Employee {
     private Department department;
 
 
-//    @OneToOne(fetch = FetchType.EAGER)
+
+
+
+//    @OneToOne(mappedBy = "departmentHead", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 //    @JoinColumn(name = "departmentHead_id")
-//    private Employee departmentHead;
+//    private Department departmentHead;
 
     public long getId() {
         return id;

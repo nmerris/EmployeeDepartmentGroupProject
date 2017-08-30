@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head th:replace="fragments :: headerFragment"></head>
+
+<body class="skill-page">
+
+<!-- pass a bunch of boolean variables over to the nav fragment, so it knows which links to enable and highlight -->
+
+
+<div class="container">
+    <div class="col-lg-6 col-lg-offset-3">
+        <div class="panel panel-default card card-3">
+            <div class="panel-body">
+
+                <div class="panel panel-primary">
+                    <div class="panel-heading"><h4><b>Department Name</b></h4></div>
+                    <ul class="list-group">
+                        <li class="list-group-item" th:text="${department.name}"></li>
+                        <li class="list-group-item" th:text="${department.departmentHeadFullName}"></li>
+                    </ul>
+                </div>
+                <a class="btn btn-primary bold-input" th:href="@{/adddepartment}">+ Add Another</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Footer -->
+
+
+<!-- javascript -->
+<!-- th:block goes away after processing, but what's inside stays, so it won't affect the page layout -->
+<th:block th:replace="fragments :: javaScriptTemplate"></th:block>
+
+
+</body>
+
+</html>

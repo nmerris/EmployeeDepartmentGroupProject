@@ -1,6 +1,9 @@
 package com.example.demo.models;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.Set;
 
 @Entity
@@ -10,6 +13,7 @@ public class Department {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
+    @NotEmpty
     private String name;
 
     // one Director may have many movies
@@ -24,8 +28,16 @@ public class Department {
     public Set<Employee> employees;
 
 
-//    @OneToOne(mappedBy = "departmentHead", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    public long departmentHeadEmployeeId;
+//    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    // when an administrator is entering a new department, they must specify the dept head employee id
+    // if it's not in the employee repo, show a message saying that the employee was not found
+//    public Employee departmentHead;
+
+//    public Employee departmentHead;
+
+    //@NotNull
+    private long departmentHeadEmployeeId;
+    private String departmentHeadFullName;
 
 
     public long getId() {
@@ -52,11 +64,36 @@ public class Department {
         this.employees = employees;
     }
 
+//    public long getDepartmentHeadEmployeeId() {
+//        return departmentHeadEmployeeId;
+//    }
+//
+//    public void setDepartmentHeadEmployeeId(long departmentHeadEmployeeId) {
+//        this.departmentHeadEmployeeId = departmentHeadEmployeeId;
+//    }
+//
+//    public Employee getDepartmentHead() {
+//        return departmentHead;
+//    }
+//
+//    public void setDepartmentHead(Employee departmentHead) {
+//        this.departmentHead = departmentHead;
+//    }
+
+
     public long getDepartmentHeadEmployeeId() {
         return departmentHeadEmployeeId;
     }
 
     public void setDepartmentHeadEmployeeId(long departmentHeadEmployeeId) {
         this.departmentHeadEmployeeId = departmentHeadEmployeeId;
+    }
+
+    public String getDepartmentHeadFullName() {
+        return departmentHeadFullName;
+    }
+
+    public void setDepartmentHeadFullName(String departmentHeadFullName) {
+        this.departmentHeadFullName = departmentHeadFullName;
     }
 }

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head th:replace="fragments :: headerFragment"></head>
+
+<body>
+
+
+<div class="container">
+    <div class="col-lg-6 col-lg-offset-3">
+        <div class="panel panel-default card card-3">
+            <div class="panel-body">
+                <div class="text-center feedback">
+                    <h2>Welcome to the Employee Directory</h2>
+                </div>
+
+
+
+
+                <!-- list of departments -->
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <caption><h3><b>List of Departments</b></h3></caption>
+                        <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Dept Head</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <th:block th:each="item:${departments}">
+                            <tr>
+                                <td><h3 th:text="${item.name}"></h3></td>
+                                <td><p th:text="${item.departmentHead.firstName}"></p></td>
+                            </tr>
+                        </th:block>
+                        </tbody>
+                    </table>
+                </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+</body>
+</html>
