@@ -26,6 +26,10 @@ public class Employee {
     private Department department;
 
 
+//    @OneToOne(fetch = FetchType.EAGER)
+//    @JoinColumn(name = "departmentHead_id")
+//    private Employee departmentHead;
+
     public long getId() {
         return id;
     }

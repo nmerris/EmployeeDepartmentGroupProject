@@ -24,6 +24,10 @@ public class Department {
     public Set<Employee> employees;
 
 
+//    @OneToOne(mappedBy = "departmentHead", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    public long departmentHeadEmployeeId;
+
+
     public long getId() {
         return id;
     }
@@ -46,5 +50,13 @@ public class Department {
 
     public void setEmployees(Set<Employee> employees) {
         this.employees = employees;
+    }
+
+    public long getDepartmentHeadEmployeeId() {
+        return departmentHeadEmployeeId;
+    }
+
+    public void setDepartmentHeadEmployeeId(long departmentHeadEmployeeId) {
+        this.departmentHeadEmployeeId = departmentHeadEmployeeId;
     }
 }
