@@ -201,18 +201,6 @@ public class MainController {
 
 
 
-//        model.addAttribute("employee", oneemployee);
-
-//
-//        Department onedepartment = departmentRepository.findOne(oneemployee.getDepartment().getId());
-//        model.addAttribute("onedepartment", departmentRepository.findOne(oneemployee.getDepartment().getId()));
-//
-//        System.out.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% deptId: " + oneemployee.getDepartment().getId());
-//
-//        System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! employeeID: " + id);
-//
-
-
 
 
         long deptToGoTo = oneemployee.getDepartment().getId();
