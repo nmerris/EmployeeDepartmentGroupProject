@@ -110,24 +110,51 @@ public class MainController {
             return "employeeform";
         }
 
+        // find out what department was just entered in the form
+        Department deptJustEntered = employee.getDepartment();
+        System.out.println("###################################### just entered DEPARTMENT ID: " + deptJustEntered.getId());
 
-        employee.setDepartment(departmentRepository.findOne(employee.getDepartment().getId()));
+        // get the ENTIRE Department object from the repo, based on the id that was just entered in the drop down
+        Department fullDeptObject = departmentRepository.findOne(employee.getDepartment().getId());
+        String deptName = fullDeptObject.getName();
+        System.out.println("###################################### just entered DEPARTMENT NAME: " + deptName);
+
+        employee.setDepartment(fullDeptObject);
+
+
+        System.out.println("###################################### about to save to employee repo.......");
+
+
+        employee.setHeadOfThisDepartment(fullDeptObject);
+
+        fullDeptObject.setDeptHeadEmployee(employee);
 
         employeeRepository.save(employee);
 
 
+        System.out.println("###################################### just saved to employee repo... ok!");
 
-//        if (employee.getHeadOfThisDepartment()!=null)
+
+        // check to see if employee that was just entered in the form was entered as the head of any department
+//        if (employee.getHeadOfThisDepartment() != null)
 //        {
-////            employee.getHeadOfThisDepartment().getDeptHeadEmployee().setId(employee.getId());
+//            // this employee is the head of some department
+//
+////            employee.setHeadOfThisDepartment(employee.getHeadOfThisDepartment());
+//
+//
 //
 //            Department departmentwithhead = employee.getHeadOfThisDepartment();
 //
 //            departmentwithhead.setDeptHeadEmployee(employee);
 //
+//            System.out.println("###################################### about to save to department repo.......");
+//
+//
 //            departmentRepository.save(departmentwithhead);
 //        }
-//Employee employeetest = employeeRepository.findOne(employee.getId());
+
+//        Employee employeetest = employeeRepository.findOne(employee.getId());
 
         model.addAttribute("employee", employee);
 

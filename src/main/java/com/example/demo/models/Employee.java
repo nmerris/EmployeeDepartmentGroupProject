@@ -26,16 +26,23 @@ public class Employee {
 
 
     @ManyToOne(fetch = FetchType.EAGER)
-    // director_id is just the name we are choosing to call the JOIN column, you can name it anything you want, but
-    // [entity-name]_id is convention
     @JoinColumn(name = "department_id")
 //    @NotNull
     private Department department;
 
 
+
     @OneToOne(mappedBy = "deptHeadEmployee", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-//    @JoinColumn(name = "ifhead_department_id")
     public Department headOfThisDepartment;
+
+    // use this to set this employee as a department head of Department d
+    public void addAsDepartmentHead(Department d) {
+        d.setDeptHeadEmployee(this);
+
+        // this is it, nothing else to do here because there is only one
+        // dept head for a dept, so there is no Set to add to, like in
+        // Department.addEmployee
+    }
 
 
 
