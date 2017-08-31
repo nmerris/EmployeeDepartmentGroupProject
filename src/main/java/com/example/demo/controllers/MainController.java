@@ -2,6 +2,7 @@ package com.example.demo.controllers;
 
 import com.example.demo.models.Department;
 import com.example.demo.models.Employee;
+import com.example.demo.models.Team;
 import com.example.demo.repositories.DepartmentRepository;
 import com.example.demo.repositories.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -110,51 +111,53 @@ public class MainController {
             return "employeeform";
         }
 
-        // find out what department was just entered in the form
-        Department deptJustEntered = employee.getDepartment();
-        System.out.println("###################################### just entered DEPARTMENT ID: " + deptJustEntered.getId());
 
-        // get the ENTIRE Department object from the repo, based on the id that was just entered in the drop down
+
         Department fullDeptObject = departmentRepository.findOne(employee.getDepartment().getId());
-        String deptName = fullDeptObject.getName();
-        System.out.println("###################################### just entered DEPARTMENT NAME: " + deptName);
-
         employee.setDepartment(fullDeptObject);
 
 
-        System.out.println("###################################### about to save to employee repo.......");
+
+        // check to see what the value is for 'no dept' from drop down
+         System.out.println("###################################### employee depthead id was: " + employee.getDepartment().getId());
 
 
-        employee.setHeadOfThisDepartment(fullDeptObject);
 
-        fullDeptObject.setDeptHeadEmployee(employee);
+
+
+        // check to see if employee that was just entered in the form was entered as the head of any department
+        if (employee.getHeadOfThisDepartment().getId() != -1)
+        {
+            // this employee is the head of some department
+
+            Department headdepartment = departmentRepository.findOne(employee.getHeadOfThisDepartment().getId());
+
+//            employee.setHeadOfThisDepartment(employee.getHeadOfThisDepartment());
+            employee.setHeadOfThisDepartment(headdepartment);
+            fullDeptObject.setDeptHeadEmployee(employee);
+
+
+//            Department departmentwithhead = employee.getHeadOfThisDepartment();
+//
+//            departmentwithhead.setDeptHeadEmployee(employee);
+
+            System.out.println("###################################### about to save to department repo.......");
+
+
+//            departmentRepository.save(departmentwithhead);
+        }
+
+        else {
+            employee.setHeadOfThisDepartment(null);
+        }
+
+//        Employee employeetest = employeeRepository.findOne(employee.getId());
+
+
 
         employeeRepository.save(employee);
 
 
-        System.out.println("###################################### just saved to employee repo... ok!");
-
-
-        // check to see if employee that was just entered in the form was entered as the head of any department
-//        if (employee.getHeadOfThisDepartment() != null)
-//        {
-//            // this employee is the head of some department
-//
-////            employee.setHeadOfThisDepartment(employee.getHeadOfThisDepartment());
-//
-//
-//
-//            Department departmentwithhead = employee.getHeadOfThisDepartment();
-//
-//            departmentwithhead.setDeptHeadEmployee(employee);
-//
-//            System.out.println("###################################### about to save to department repo.......");
-//
-//
-//            departmentRepository.save(departmentwithhead);
-//        }
-
-//        Employee employeetest = employeeRepository.findOne(employee.getId());
 
         model.addAttribute("employee", employee);
 
@@ -234,6 +237,16 @@ public class MainController {
 
 
         return "redirect:/show/" + deptToGoTo;
+    }
+
+    @GetMapping("/team")
+    public String addteam(Model model)
+    {
+
+        Team team= new Team();
+        model.addAttribute("team", team);
+
+        return "teamform";
     }
 
 

@@ -34,6 +34,9 @@
 
     <select th:field="*{headOfThisDepartment.id}">
         <!--<th:block th:each="director:${alldirector}">-->
+        <option th:value="-1">Not a department head</option>
+        <!--<option value="-1">Not a department head</option>-->
+
         <option th:each="department:${alldepartments}"
                 th:value="${department.id}" th:inline="text">[[${department.name}]]</option>
 

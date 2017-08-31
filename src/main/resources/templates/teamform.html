@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head th:replace="fragments :: headerFragment"></head>
+
+<body class="person-page">
+
+<!-- pass a bunch of boolean variables over to the nav fragment, so it knows which links to enable and highlight -->
+
+
+<div class="container">
+    <div class="col-lg-6 col-lg-offset-3">
+        <div class="panel panel-default card card-3">
+            <div class="panel-body">
+                <div class="text-center feedback">
+                    <h2>Please enter personal details</h2>
+                </div>
+
+                <form action="#" th:action="@{/addteam}" th:object="${team}" method="post">
+                    <!-- need this or id is zero every time and keep getting additional records when updating -->
+                    <input type="hidden" th:field="*{id}" />
+
+                    <div class="form-group">
+                        <label class="section-heading" for="nameFirst">Team Name</label>
+                        <input id="nameFirst" class="form-control" type="text" th:field="*{teamName}" autofocus/>
+                        <p class="alert alert-danger" th:if="${#fields.hasErrors('teamName')}" th:errors="*{teamName}"></p>
+                    </div>
+                    <!--<div class="form-group">-->
+                    <!--<label class="section-heading" for="nameLast">Head Employee Id</label>-->
+                    <!--<input id="nameLast" class="form-control" type="text" th:field="*{deptHeadEmployee.id}"/>-->
+                    <!--&lt;!&ndash;<p class="alert alert-danger" th:if="${#fields.hasErrors('departmentHeadEmployeeId')}" th:errors="*{departmentHeadEmployeeId}"></p>&ndash;&gt;-->
+                    <!--</div>-->
+
+
+                    <div class="clearfix"></div>
+                    <input class="btn btn-primary bold-input" type="submit" value="Submit"/>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Footer -->
+
+<!-- javascript and modal divs -->
+<!-- th:block goes away after processing, but what's inside stays, so it won't affect the page layout -->
+<th:block th:replace="fragments :: javaScriptTemplate"></th:block>
+
+
+
+</body>
+
+</html>

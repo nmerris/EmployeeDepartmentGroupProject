@@ -4,6 +4,8 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 public class Employee {
@@ -21,7 +23,8 @@ public class Employee {
 
     private long workNumber;
 
-
+    @ManyToMany
+    private Set<Team> teams;
 
 
 
@@ -101,4 +104,24 @@ public class Employee {
     public void setHeadOfThisDepartment(Department headOfThisDepartment) {
         this.headOfThisDepartment = headOfThisDepartment;
     }
+
+    public Set<Team> getTeams() {
+        return teams;
+    }
+
+    public void setTeams(Set<Team> teams) {
+        this.teams = teams;
+    }
+
+    public Employee()
+    {
+        this.teams=new HashSet<Team>();
+    }
+
+    public void addteam(Team t){
+
+        this.teams.add(t);
+
+    }
+
 }
